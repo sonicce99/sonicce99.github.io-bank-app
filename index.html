@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bank-app</title>
+
+  <!--파비콘-->
+<link rel="icon" href="./assets/favicon.png" />  
+
+  <!-- css -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
+<link rel="stylesheet" href="./css/main.css">
+
+<!-- swiper -->
+<link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+<!-- chart.js -->
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js" integrity="sha512-Wt1bJGtlnMtGP0dqNFH1xlkLBNpEodaiQ8ZN5JLA5wpc1sUlk/O5uuOMNgvzddzkpvZ9GLyYNa8w2s7rqiTk5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- javascript -->
+<script defer src="./js/main.js"></script>
+
+
+</head>
+<body>
+  <div class="wrap">
+    <!-- 핸드폰 상태에 관한 사항 -->
+    <div class="phone-info">
+      <div class="time">
+        <div class="hour">9</div>
+        :
+        <div class="minute">41</div>
+      </div>
+      <ul>
+        <li>
+          <img src="./assets/Cellular_Connection.svg" alt="셀룰러 상태" />
+        </li>
+        <li>
+          <img src="./assets/Wifi.svg" alt="와이파이" />
+        </li>
+        <li>
+          <img src="./assets/Battery.svg" alt="배터리" />
+        </li>
+      </ul>
+    </div>
+
+    <!-- header -->
+    <header>
+      <ul>
+        <li>
+          <div class="profile">
+            <img src="./assets/profile.jpg" alt="프로필" />
+          </div>
+          <h3>생활비</h3>
+          <div class="header-option">
+            <ul>
+              <li>
+                <a href="javascript:void(0)">
+                  <img src="./assets/header-option-qr.svg" alt="QR" />
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0)">
+                  <img src="./assets/header-option-search.svg" alt="Search" />
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </header>
+
+    <!-- card -->
+    <div class="card">
+      <div class="card-top">
+        <ul>
+          <li>
+            <div class="Account-number">355-673877-78773</div>
+          </li>
+          <li>
+            <button class='send'>이체</button>
+          </li>
+        </ul>
+        <div class="Change">1,240,000원</div>
+        <ul class='chart-bar'>
+          <li>
+            <div class="Account-bar">
+              <input type="range" min="0" max="100" value="60" step="1" id="standard" class="Account-slidebar">
+            </div>
+          </li>
+          <li>
+            <button class='chart-in'>
+              <img src="./assets/mdi_bar_chart.svg" alt="mid_bar_chart" />
+            </button>          
+          </li>
+        </ul>
+        <div class="card-bottom">5일 동안 210,000원 남음</div>
+      </div>
+    </div>
+
+    <!-- 대출관련 광고 -->
+    <h1 class="ad">동수&nbsp;&nbsp;<a href="https://www.youtube.com/channel/UCqa4CnlUu--_X0lXWURBNEQ" target="_blank"><u>Go</u></a></h1>
+
+    <div class="transaction-container">
+      <img class="scroll-bar" src="./assets/scroll-bar.svg" alt="scroll_bar" />
+
+      <div class="graph">
+        <ul>
+          <li class="fill1">
+            <input type="range" min="0" max="100" value="60" step="1" class='go-trip'>
+            <span>여행가자! <br>842,200원</span>
+          </li>
+          <li class="fill2">
+            <input type="range" min="0" max="100" value="60" step="1" class='freezer'>
+            <span>냉장고사기 <br>142,200원</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- json data -->
+      <div class="swiper-container swiper1">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- chart page -->
+  <div class="chart-page">
+    <div class="swiper-container swiper2">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide chart">
+          <header class="header">
+            <button class="close">닫기</button>
+            <h2>지출 관리</h2>
+          </header>
+          <div class="standard-setting">
+            <p class="standard">기준금액설정</p>
+            <span>2,100,000원</span>
+          </div>
+          <div class="Standard-bar">
+          <input type="range" min="0" max="3000000" value="1000000" step="10000" class="standard-slidebar">
+          </div>
+  
+          <div class="daily-report">
+            <p class="day-report">일간 지출 리포트</p>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12">
+                  <canvas id="myChartOne"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="spending-pattern">
+            <p>최근 30일 지출 패턴</p>
+
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12">
+                  <canvas id="myChartTwo"></canvas>
+                  <div class="hole">
+                    <span>1,736,500</span>
+                    <p>원</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="inner">
+              <ul class="img">
+                <li>
+                  <img src="./assets/spending-pattern-icon(6).jpg" alt="소득" class="aaa" />
+                </li>
+                <li>
+                  <img src="./assets/spending-pattern-icon(2).svg" alt="건강관리비" />
+                </li>
+                <li>
+                  <img src="./assets/spending-pattern-icon(3).svg" alt="외식비" />
+                </li>
+                <li>
+                  <img src="./assets/spending-pattern-icon(4).svg" alt="장보기" />
+                </li>
+                <li>
+                  <img src="./assets/spending-pattern-icon(5).svg" alt="상점" />
+                </li>
+                <li>
+                  <img src="./assets/spending-pattern-icon(1).svg" alt="차모양" />
+                </li>
+              </ul>
+              <ul class="word">
+                <li class="spend-money0">
+                  <p>소득</p>
+                  <span>56,000원</span>
+                </li>
+                <li class="spend-money1">
+                  <p>운동</p>
+                  <span>80,000원</span>
+                </li>
+                <li class="spend-money2">
+                  <p>외식비</p>
+                  <span>233,000원</span>
+                </li>
+                <li class="spend-money3">
+                  <p>장보기</p>
+                  <span>390,000원</span>
+                </li>
+                <li class="spend-money4">
+                  <p>쇼핑</p>
+                  <span>46,000원</span>
+                </li>
+                <li class="spend-money5">
+                  <p>주유비</p>
+                  <span>46,000원</span>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+   <!-- nav -->
+   <nav>
+    <ul class="tab-menu">
+      <li class="tab-menu-item">
+        <a href="javascript:void(0)">
+          <img src="./assets/home.svg" alt="tab-menu_1" class="home" />
+        </a>
+      </li>
+      <li class="tab-menu-item">
+        <a href="javascript:void(0)">
+          <img src="./assets/arrow.svg" alt="tab-menu_1" />
+        </a>
+      </li>
+      <li class="tab-menu-item">
+        <a href="javascript:void(0)">
+          <img src="./assets/bubble.svg" alt="tab-menu_3" />
+        </a>
+      </li>
+      <li class="tab-menu-item">
+        <a href="javascript:void(0)">
+          <img src="./assets/menu.svg" alt="tab-menu_4" />
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+</body>
+</html>
